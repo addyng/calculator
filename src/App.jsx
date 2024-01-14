@@ -1,9 +1,10 @@
-// import { useState } from 'react'
+import { useState } from "react";
 import "./styles.css";
 
-let num1 = 0;
-let num2 = 0;
+let num1 = "0";
+let num2 = "0";
 let operator = "";
+// let total = 0;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -37,41 +38,58 @@ function operate(num1, num2, operator) {
 }
 
 export default function App() {
+    const [displayValue, setCurrent] = useState("0");
+    const operatorList = ["+", "-", "%", "/", "*"];
+
+    const updateDisplay = (val) => {
+        if (num1 === "0" && operator === '') {
+            num1 = val;
+            setCurrent(num1);
+        }
+        else if (num1 != "0" && operator === '') {
+            num1 = num1 + val;
+            setCurrent(num1);
+        }
+        // if (operatorList.includes(val) && operator === '') {
+        //     setCurrent(val);
+        // }
+    }
+
     return (
         <div id="root">
             <div id="header">Calculator</div>
 
             <div id="center">
                 <div id="calculator">
-                    <div id="display">0</div>
+                    <div id="display">{displayValue}</div>
                     <div id="buttons">
                         <div id="first">
                             <button id="clearAll">AC</button>
                             <button id="sign">+/-</button>
-                            <button id="modulo">%</button>
-                            <button id="divide">/</button>
+                            <button id="modulo" value="%" onClick={() => updateDisplay("%")}>%</button>
+                            <button id="divide" value="/" onClick={() => updateDisplay("/")}>/</button>
                         </div>
                         <div id="second">
-                            <button id="7">7</button>
-                            <button id="8">8</button>
-                            <button id="9">9</button>
-                            <button id="multiply">*</button>
+                            <button id="seven" value="7" onClick={() => updateDisplay("7")}>7</button>
+                            <button id="eight" value="8" onClick={() => updateDisplay("8")}>8</button>
+                            <button id="nine" value="9" onClick={() => updateDisplay("9")}>9</button>
+                            <button id="multiply" value="*" onClick={() => updateDisplay("*")}>*</button>
                         </div>
                         <div id="third">
-                            <button id="4">4</button>
-                            <button id="5">5</button>
-                            <button id="6">6</button>
-                            <button id="subtract">-</button>
+                            <button id="four" value="4" onClick={() => updateDisplay("4")}>4</button>
+                            <button id="five" value="5" onClick={() => updateDisplay("5")}>5</button>
+                            <button id="six" value="6" onClick={() => updateDisplay("6")}>6</button>
+                            <button id="subtract" value="-" onClick={() => updateDisplay("-")}>-</button>
                         </div>
                         <div id="fourth">
-                            <button id="1">1</button>
-                            <button id="2">2</button>
-                            <button id="3">3</button>
-                            <button id="add">+</button>
+                            <button id="one" value="1" onClick={() => updateDisplay("1")}>1</button>
+                            <button id="two" value="2" onClick={() => updateDisplay("2")}>2</button>
+                            <button id="three" value="3" onClick={() => updateDisplay("3")}>3</button>
+                            <button id="add" value="+" onClick={() => updateDisplay("+")}>+</button>
                         </div>
                         <div id="fifth">
-                            <button id="zero">0</button>
-                            <button id="dot">.</button>
+                            <button id="zero" value="0" onClick={() => updateDisplay("0")}>0</button>
+                            <button id="dot" value="." onClick={() => updateDisplay(".")}>.</button>
                             <button id="equal">=</button>
                         </div>
                     </div>
